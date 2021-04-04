@@ -1,0 +1,24 @@
+{
+  "name": "project-ghg",
+  "version": "1.0.0",
+  "description": "3rd year project",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon/app.js"
+  },
+  "keywords": [
+    "node",
+    "ghg"
+  ],
+  "author": "oZka",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.4.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.1",
+    "multer": "^1.4.2"
+  }
+}
