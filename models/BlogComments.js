@@ -2,6 +2,14 @@ const mongoose = require("mongoose");
 
 //comments model this model is related to the both plant blog model and pant steps
 const comments = mongoose.Schema({
+  blogId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "PlantBlog",
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   name: {
     type: String,
     required: true,
@@ -19,7 +27,7 @@ const comments = mongoose.Schema({
   reply_comment: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Comments",
+      ref: "ReplyComments",
     },
   ],
 });

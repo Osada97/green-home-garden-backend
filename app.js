@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const userRoutes = require("./routes/userRoutes");
 const blogCrud = require("./routes/blogCrud");
 const fileRoute = require("./routes/fileRoute");
+const comments = require("./routes/comments");
 require("dotenv/config");
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/users", userRoutes);
 app.use("/blog", blogCrud);
 app.use("/image", fileRoute);
+app.use("/comment", comments);
 
 //static files
 app.use("/img", express.static("uploads/images"));

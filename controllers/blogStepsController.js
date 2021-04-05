@@ -1,6 +1,6 @@
 const BlogSteps = require("../models/BlogSteps");
 const PlantBlog = require("../models/PlantBlog");
-const { blogStepsvalidation, iniitialBlogValidation } = require("../validaton");
+const { blogStepsvalidation } = require("../validaton");
 
 const blogStepsCreate = async (req, res) => {
   //validate blogstep

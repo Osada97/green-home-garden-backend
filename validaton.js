@@ -53,7 +53,18 @@ const blogStepsvalidation = (data) => {
   return blogSteps.validate(data);
 };
 
+//blog comment validation
+const blogCommentValidation = (data) => {
+  const blogCommentSchema = Joi.object({
+    name: Joi.string().required().max(100),
+    body: Joi.string().required().max(255),
+  });
+
+  return blogCommentSchema.validate(data);
+};
+
 module.exports.registerValidation = registerValidation;
 module.exports.loginValidation = loginValidation;
 module.exports.iniitialBlogValidation = iniitialBlogValidation;
 module.exports.blogStepsvalidation = blogStepsvalidation;
+module.exports.blogCommentValidation = blogCommentValidation;
