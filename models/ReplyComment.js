@@ -4,11 +4,17 @@ const mongoose = require("mongoose");
 const replyComments = mongoose.Schema({
   ParentComment: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Comments",
+    refPath: "onModel",
+  },
+  onModel: {
+    type: String,
+    required: true,
+    enum: ["Comments", "StepComments"],
   },
   userId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
   name: {
     type: String,

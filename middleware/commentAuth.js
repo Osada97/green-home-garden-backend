@@ -1,9 +1,10 @@
 const e = require("express");
 const BlogComments = require("../models/BlogComments");
 const BlogSteps = require("../models/BlogSteps");
+const ReplyComment = require("../models/ReplyComment");
 const StepComments = require("../models/StepComments");
 
-//chicking comment user id is equal to current user id
+//checking comment user id is equal to current user id
 const cmtUserAuth = async (req, res, next) => {
   const commentId = req.params.Id;
   await BlogComments.findById(commentId, function (err, result) {
@@ -27,7 +28,7 @@ const cmtUserAuth = async (req, res, next) => {
   });
 };
 
-//cheking comment id is belong to user created blog and this middleware is use for delte blog comment in blog user role
+//checking comment id is belong to user created blog and this middleware is use for delete blog comment in blog user role
 const usersBlogComment = async (req, res, next) => {
   const commentid = req.params.Id;
 
@@ -51,7 +52,7 @@ const usersBlogComment = async (req, res, next) => {
   }).populate("blogId");
 };
 
-//cheking step comment belongs current user
+//checking step comment belongs current user
 const stepcmtUserAuth = async (req, res, next) => {
   const commentId = req.params.Id;
   await StepComments.findById(commentId, function (err, result) {
@@ -75,7 +76,7 @@ const stepcmtUserAuth = async (req, res, next) => {
   });
 };
 
-//chicking blog step comment user is equl to the parent blog user
+//checking blog step comment user is equal to the parent blog user
 const authParentBlogStep = async (req, res, next) => {
   const commentId = req.params.Id;
 
@@ -92,9 +93,31 @@ const authParentBlogStep = async (req, res, next) => {
         next();
       }
     } else {
-      return res.status(400).json({ message: "Comment Id is Invalied" });
+      return res.status(400).json({ message: "Comment Id is Invalid" });
     }
   }).populate({ path: "stepId", populate: { path: "parent_blog" } });
+};
+
+/* Reply comments goes in here */
+//checking reply comment user idn is equal to the current user (reply comment edit/reply comment delete)
+const authReplyCmt = (req, res, next) => {
+  const id = req.params.Id;
+  ReplyComment.findById(id, function (err, result) {
+    if (err) {
+      return res.status(400).send(err);
+    }
+    if (!result) {
+      return res.status(400).json({ message: "Reply comment id is invalid" });
+    } else {
+      if (result.userId != req.user._id) {
+        return res.status(400).json({
+          message: "This User cannot edit this comment",
+        });
+      } else {
+        next();
+      }
+    }
+  });
 };
 
 module.exports = {
@@ -102,4 +125,5 @@ module.exports = {
   usersBlogComment,
   stepcmtUserAuth,
   authParentBlogStep,
+  authReplyCmt,
 };
