@@ -136,7 +136,7 @@ const getAllBlog = async (req, res) => {
     if (result) {
       return res.send(result);
     }
-  });
+  }).populate("reply_comment");
 };
 
 //blog steps comment controlles
@@ -271,7 +271,7 @@ const getStepComment = async (req, res) => {
     } else {
       res.status(400).json({ message: "Stepd id Is invalied" });
     }
-  });
+  }).populate("reply_comment");
 };
 
 module.exports = {
