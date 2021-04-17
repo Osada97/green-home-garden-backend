@@ -24,6 +24,28 @@ const loginValidation = (data) => {
   return schema.validate(data);
 };
 
+//user details validation
+const userDetailsValidation = (data) => {
+  const schema = Joi.object({
+    first_name: Joi.string().required().min(4),
+    last_name: Joi.string().required().min(4),
+    user_name: Joi.string().required(),
+    email: Joi.string().email().required().min(4),
+  });
+
+  return schema.validate(data);
+};
+
+//password validation
+const passwordValidation = (data) => {
+  const schema = Joi.object({
+    currentPassword: Joi.string().min(4).required(),
+    password: Joi.string().min(4).required(),
+  });
+
+  return schema.validate(data);
+};
+
 //blog user create blog validatoin
 const iniitialBlogValidation = (data) => {
   const blogSchema = Joi.object({
@@ -68,3 +90,5 @@ module.exports.loginValidation = loginValidation;
 module.exports.iniitialBlogValidation = iniitialBlogValidation;
 module.exports.blogStepsvalidation = blogStepsvalidation;
 module.exports.blogCommentValidation = blogCommentValidation;
+module.exports.userDetailsValidation = userDetailsValidation;
+module.exports.passwordValidation = passwordValidation;
