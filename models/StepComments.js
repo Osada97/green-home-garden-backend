@@ -20,6 +20,9 @@ const Stepcomments = mongoose.Schema({
     required: true,
     max: 255,
   },
+  pic: {
+    type: String,
+  },
   date: {
     type: Date,
     default: Date.now(),

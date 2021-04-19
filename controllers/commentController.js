@@ -34,7 +34,7 @@ const blogCreateCommetns = async (req, res) => {
         },
         { useFindAndModify: true, new: true }
       )
-        .then((result) => {
+        .then(() => {
           res.json({ message: "Comment is added", result });
         })
         .catch((err) => {

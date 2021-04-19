@@ -20,6 +20,10 @@ const {
   stepcmtUserAuth,
   authParentBlogStep,
 } = require("../middleware/commentAuth");
+const {
+  uploadCmtImage,
+  uploadSteCmtImage,
+} = require("../controllers/cmtImageController");
 
 const router = express.Router();
 
@@ -57,6 +61,9 @@ router.delete(
 //get all comments that belongs to specific blog
 router.get("/getcomments/:bId", auth, authUser, getAllBlog);
 
+//uploading comments picture
+router.post("/uploadcmtpic/:cid", auth, authUser, uploadCmtImage);
+
 /*blog steps comment routes*/
 //add steps comments
 router.post("/stepcmtadd/:Id", auth, authUser, ckStepUser, addStepComments);
@@ -90,5 +97,8 @@ router.delete(
 
 //get all blog steps comment
 router.get("/getallstepcomment/:sid", auth, authUser, getStepComment);
+
+//upload step comment image upload
+router.post("/uploadstcmtpic/:cid", auth, authUser, uploadSteCmtImage);
 
 module.exports = router;

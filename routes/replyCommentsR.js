@@ -12,6 +12,7 @@ const {
 } = require("../middleware/commentAuth");
 const { auth } = require("../middleware/verifyToken");
 const { blogUserRole } = require("../middleware/basicAuth");
+const { uploadRpCmtImage } = require("../controllers/cmtImageController");
 
 const router = express.Router();
 
@@ -36,5 +37,8 @@ router.delete(
 
 //get one reply comment
 router.get("/:Id", auth, authUser, getReplycmt);
+
+//upload reply comment image
+router.post("/uploadcmtimg/:cid", auth, authUser, uploadRpCmtImage);
 
 module.exports = router;
