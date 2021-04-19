@@ -1,1 +1,5 @@
+#resticted to push node modules
 /node_modules
+
+#restricted to push uploads file to git 
+/uploads
