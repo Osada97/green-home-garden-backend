@@ -1,4 +1,4 @@
-const pagination = require("../../middleware/pagination");
+const pagination = require("../../pagination");
 const PlantBlog = require("../../models/PlantBlog");
 
 //get plants using form filling
