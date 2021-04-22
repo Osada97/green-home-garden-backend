@@ -20,6 +20,10 @@ const PlantBlogScheme = mongoose.Schema({
     type: String,
     required: true,
   },
+  whether_type: {
+    type: String,
+    default: "any",
+  },
   plant_type: {
     type: String,
     required: true,
@@ -39,6 +43,7 @@ const PlantBlogScheme = mongoose.Schema({
   volume: {
     type: Number,
     required: true,
+    default: 1,
   },
   created_at: {
     type: Date,

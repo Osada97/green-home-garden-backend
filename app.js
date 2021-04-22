@@ -5,6 +5,7 @@ const blogCrud = require("./routes/blogCrud");
 const fileRoute = require("./routes/fileRoute");
 const comments = require("./routes/comments");
 const replycmt = require("./routes/replyCommentsR");
+const searchPlant = require("./routes/users/searchPlant");
 require("dotenv/config");
 
 const app = express();
@@ -19,12 +20,18 @@ app.use("/image", fileRoute);
 app.use("/comment", comments);
 app.use("/replycmt", replycmt);
 
+//user route middleware
+app.use("/bloguser", searchPlant);
+
 //static files
 app.use("/img", express.static("uploads/images"));
 
 //connect to the database
 mongoose
-  .connect(process.env.DB_URL, { useUnifiedTopology: true })
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then((result) => {
     console.log("conected to the database");
     //server listening
