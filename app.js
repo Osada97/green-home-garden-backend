@@ -5,7 +5,7 @@ const blogCrud = require("./routes/blogCrud");
 const fileRoute = require("./routes/fileRoute");
 const comments = require("./routes/comments");
 const replycmt = require("./routes/replyCommentsR");
-const searchPlant = require("./routes/users/searchPlant");
+const nrUser = require("./routes/users/nrUser");
 require("dotenv/config");
 
 const app = express();
@@ -21,7 +21,7 @@ app.use("/comment", comments);
 app.use("/replycmt", replycmt);
 
 //user route middleware
-app.use("/bloguser", searchPlant);
+app.use("/bloguser", nrUser);
 
 //static files
 app.use("/img", express.static("uploads/images"));

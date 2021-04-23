@@ -31,7 +31,8 @@ const getPlants = (req, res) => {
         if (result.length == 0) {
           return res.json({ message: "No Plants Can Find" });
         }
-        return res.send(pagination(result, page));
+
+        return res.send(pagination(result, page, availableCategory(result)));
       }
     );
   } else {
@@ -60,10 +61,26 @@ const getPlants = (req, res) => {
         if (result.length == 0) {
           return res.json({ message: "No Plants Can Find" });
         }
-        return res.send(pagination(result, page));
+        return res.send(pagination(result, page, availableCategory(result)));
       }
     );
   }
+};
+
+//function for get available category
+const availableCategory = (result) => {
+  const cresult = [...result];
+  const av = [];
+
+  cresult.map((data) => {
+    //checking new array has same data
+    av.push(data.category);
+  });
+  const avil = av.filter((value, pos) => {
+    return av.indexOf(value) == pos;
+  });
+
+  return avil;
 };
 
 module.exports = { getPlants };

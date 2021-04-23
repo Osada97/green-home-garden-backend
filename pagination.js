@@ -1,4 +1,4 @@
-const pagination = (data, page = 1, limit = 1) => {
+const pagination = (data, page = 1, avilCate = [], limit = 1) => {
   page = parseInt(page);
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
@@ -19,7 +19,7 @@ const pagination = (data, page = 1, limit = 1) => {
       limit: limit,
     };
   }
-
+  results.availableCategory = avilCate;
   results.results = data.slice(startIndex, endIndex);
 
   return results;
