@@ -22,7 +22,7 @@ const getPlants = (req, res) => {
         whether_type: whetherType,
         plant_type: plantType,
         category: category,
-        blog_title: { $regex: ".*" + search + ".*" },
+        blog_title: { $regex: ".*" + search + ".*", $options: "i" },
       },
       function (err, result) {
         if (err) {
@@ -51,7 +51,7 @@ const getPlants = (req, res) => {
         whether_type: whetherType,
         plant_type: plantType,
         category: category,
-        blog_title: { $regex: ".*" + search + ".*" },
+        blog_title: { $regex: ".*" + search + ".*", $options: "i" },
       },
       function (err, result) {
         if (err) {
