@@ -1,4 +1,4 @@
-const pagination = (data, page = 1, avilCate = [], limit = 1) => {
+const pagination = (data, page = 1, avilCate = [], limit = 4) => {
   page = parseInt(page);
   const startIndex = (page - 1) * limit;
   const endIndex = page * limit;
