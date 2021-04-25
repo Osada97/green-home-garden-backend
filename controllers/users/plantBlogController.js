@@ -1,6 +1,7 @@
 const PlantBlog = require("../../models/PlantBlog");
 const User = require("../../models/User");
 const pagination = require("../../pagination");
+const { search } = require("../../routes/users/nrUser");
 
 //add plants to the user
 const addPlantsUser = async (req, res) => {
@@ -84,6 +85,28 @@ const browsePlantslogin = async (req, res) => {
 };
 
 //browse plant by category
+const browsePlantByCategory = (req, res) => {
+  const category = req.query.category;
+  const page = req.query.page;
+  const search = req.query.search;
+
+  PlantBlog.find(
+    {
+      category: { $regex: ".*" + category + ".*", $options: "i" },
+      blog_title: { $regex: ".*" + search + ".*", $options: "i" },
+    },
+    function (err, result) {
+      if (err) {
+        return res.status(401).send(err);
+      }
+      if (result.length == 0) {
+        return res.json({ message: "No Any Result Available" });
+      }
+
+      return res.send(pagination(result, page, availableCategory(result)));
+    }
+  );
+};
 
 //function for get available category
 const availableCategory = (result) => {
@@ -123,4 +146,5 @@ module.exports = {
   addPlantsUser,
   browsePlants,
   browsePlantslogin,
+  browsePlantByCategory,
 };
