@@ -10,7 +10,7 @@ const addPlantsUser = async (req, res) => {
   await User.find(
     {
       _id: req.user._id,
-      addedPlants: id,
+      "addedPlants.plantId": id,
     },
     function (err, results) {
       if (err) {
@@ -26,7 +26,7 @@ const addPlantsUser = async (req, res) => {
           req.user._id,
           {
             $push: {
-              addedPlants: id,
+              addedPlants: { plantId: id },
             },
           },
           { useFindAndModify: true, new: true },
@@ -38,7 +38,7 @@ const addPlantsUser = async (req, res) => {
               return res.status(401).json({ message: "User Id Is Invalid" });
             }
 
-            return res.json({ message: "Plant Added", result });
+            return res.json({ message: "Plant Added Successfully", result });
           }
         );
       }
@@ -53,7 +53,7 @@ const removePlantUser = (req, res) => {
   User.findByIdAndUpdate(
     req.user._id,
     {
-      $pull: { addedPlants: id },
+      $pull: { addedPlants: { plantId: id } },
     },
     { useFindAndModify: true, new: true },
     function (err, result) {

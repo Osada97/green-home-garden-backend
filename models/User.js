@@ -1,3 +1,4 @@
+const { date } = require("joi");
 const mongoose = require("mongoose");
 
 const UserSchema = mongoose.Schema({
@@ -51,8 +52,15 @@ const UserSchema = mongoose.Schema({
   ],
   addedPlants: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "PlantBlog",
+      _id: false,
+      plantId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PlantBlog",
+      },
+      date: {
+        type: Date,
+        default: Date.now(),
+      },
     },
   ],
 });
