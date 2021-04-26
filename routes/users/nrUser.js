@@ -4,6 +4,7 @@ const {
   browsePlants,
   browsePlantslogin,
   browsePlantByCategory,
+  removePlantUser,
 } = require("../../controllers/users/plantBlogController");
 const { getPlants } = require("../../controllers/users/searchPlants");
 const { authUser } = require("../../middleware/basicAuth");
@@ -23,9 +24,10 @@ router.get("/browseplantbycat", browsePlantByCategory);
 //browse all plants after login
 router.get("/browseplantlog", auth, authUser, browsePlantslogin);
 
-//router.get("/browseplantbcate")
-
 //added plants to the user
 router.post("/addplant/:Id", auth, authUser, addPlantsUser);
+
+//remove plant from user
+router.delete("/removeplant/:Id", auth, authUser, removePlantUser);
 
 module.exports = router;

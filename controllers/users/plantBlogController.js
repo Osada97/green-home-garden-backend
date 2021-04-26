@@ -1,7 +1,6 @@
 const PlantBlog = require("../../models/PlantBlog");
 const User = require("../../models/User");
 const pagination = require("../../pagination");
-const { search } = require("../../routes/users/nrUser");
 
 //add plants to the user
 const addPlantsUser = async (req, res) => {
@@ -43,6 +42,29 @@ const addPlantsUser = async (req, res) => {
           }
         );
       }
+    }
+  );
+};
+
+//remove plant from user
+const removePlantUser = (req, res) => {
+  const id = req.params.Id;
+
+  User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $pull: { addedPlants: id },
+    },
+    { useFindAndModify: true, new: true },
+    function (err, result) {
+      if (err) {
+        return res.status(401).send(err);
+      }
+      if (!result) {
+        return res.status(401).json({ message: "User Id Is Invalid" });
+      }
+
+      return res.json({ message: "Plant Removed Successfully", result });
     }
   );
 };
@@ -147,4 +169,5 @@ module.exports = {
   browsePlants,
   browsePlantslogin,
   browsePlantByCategory,
+  removePlantUser,
 };
