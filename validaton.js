@@ -53,6 +53,7 @@ const iniitialBlogValidation = (data) => {
     category: Joi.string().required().max(200),
     plant_env_type: Joi.string().required(),
     plant_type: Joi.string().required(),
+    whether_type: Joi.string().required(),
     width: Joi.number().required(),
     height: Joi.number().required(),
     length: Joi.number().required(),

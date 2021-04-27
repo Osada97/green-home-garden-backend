@@ -17,6 +17,7 @@ const blogCretion = async (req, res) => {
     category: req.body.category,
     plantEnv_type: req.body.plant_env_type,
     plant_type: req.body.plant_type,
+    whether_type: req.body.whether_type,
     width: req.body.width,
     length: req.body.length,
     height: req.body.height,
